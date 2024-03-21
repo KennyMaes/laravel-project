@@ -7,9 +7,21 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/about', function () {
+    return view('about');
+});
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/projects', function () {
+    return view('project.project-overview');
+})->middleware(['auth', 'verified'])->name('projects');
+
+Route::get('/users', function () {
+    return view('user.user-overview');
+})->middleware(['auth', 'verified', 'is_admin'])->name('users');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

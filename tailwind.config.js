@@ -15,6 +15,13 @@ export default {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
         },
+        fontSize: {
+            xs: '1rem',
+            sm: '1.25rem',
+            base: '1.75rem',
+            lg: '2rem',
+            xl: '2.5rem',
+           },
     },
 
     plugins: [forms],
