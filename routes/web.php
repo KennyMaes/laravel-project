@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Middleware\IsAdmin;
 use Illuminate\Support\Facades\Route;
+use App\Models\User;
 
 Route::get('/', function () {
     return view('welcome');
@@ -21,7 +21,9 @@ Route::get('/projects', function () {
 })->middleware(['auth', 'verified'])->name('projects');
 
 Route::get('/users', function () {
-    return view('user.user-overview');
+    $users = User::all();
+    $currentUser = Auth::user();
+    return view('user.user-overview', ['users' => $users, 'currentUser' => $currentUser]);
 })->middleware(['auth', 'verified', 'admin'])->name('users');
 
 Route::middleware('auth')->group(function () {
