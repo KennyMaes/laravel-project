@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Middleware\IsAdmin;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -21,7 +22,7 @@ Route::get('/projects', function () {
 
 Route::get('/users', function () {
     return view('user.user-overview');
-})->middleware(['auth', 'verified'])->name('users');
+})->middleware(['auth', 'verified', 'admin'])->name('users');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
