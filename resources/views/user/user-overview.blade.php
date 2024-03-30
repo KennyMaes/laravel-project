@@ -19,7 +19,7 @@
                                         src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                                         alt="">
                                     <div class="min-w-0 flex-auto">
-                                        <p class="text-sm font-semibold leading-6 text-gray-900">{{ $user['name'] }}</p>
+                                        <a class="text-sm font-semibold leading-6 text-gray-900" href="{{ route('users.profile', [ 'id' => $user->id]) }}">{{ $user['name'] }}</a>
                                         <p class="mt-1 truncate text-xs leading-5 text-gray-500">{{ $user['email'] }}</p>
                                     </div>
                                 </div>
@@ -70,16 +70,11 @@
             var modal = $(this);
             modal.find('.modal-body').html('<p>Are you sure you want to delete <b>' + username + '</b></p>');
 
-            // Handle click event for the "Save changes" button
             $('#delete-user').click(function() {
-                // Perform your action here, for example, you can send data to the server via AJAX
-                // Here's a simple alert to demonstrate the click event
                 alert('Saving changes for user with id ' + userId);
 
-                // Close the modal if needed
+                // Close the modal
                 modal.modal('hide');
-                userId = undefined;
-                username = undefined;
             });
         });
     </script>
