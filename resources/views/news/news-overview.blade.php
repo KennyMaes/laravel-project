@@ -13,9 +13,11 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                @if (auth()->user()->is_admin == true)
                 <div class="p-6">
                     <a class="btn btn-primary" href="{{ route('news-article.new') }}">Add new article</a>
                 </div>
+                @endif
                 <div class="p-6">
                     <ul role="list" class="divide-y divide-gray-100">
                         @foreach ($articles as $article)
@@ -29,7 +31,7 @@
                                     </div>
                                 </div>
                                 <div class="hidden flex shrink-0 sm:flex sm:items-end">
-                                    @if (Auth::user()->is_admin == true)
+                                    @if (auth()->user()->is_admin == true)
                                         <div class="pr-1">
                                             <form action="{{ route('news-article.edit', [ 'id' => $article->id]) }}" method="GET">
                                                 @csrf
