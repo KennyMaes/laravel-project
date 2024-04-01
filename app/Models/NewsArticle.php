@@ -12,4 +12,9 @@ class NewsArticle extends Model
     protected $table = 'news_article';
 
     protected $fillable = ['title', 'content', 'user_id'];
+
+    public function reactions()
+    {
+        return $this->hasMany(Reaction::class);
+    }
 }

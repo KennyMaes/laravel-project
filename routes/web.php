@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\NewsArticleController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReactionController;
 use App\Models\NewsArticle;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
@@ -45,6 +46,8 @@ Route::get('/news/{id}', function ($id) {
     return view('news.news-article-detail', ['article' => $article]);
 })->middleware(['auth', 'verified'])->name('news-article.get');
 
+// REACTION
+Route::post('/reaction/{article_id}', [ReactionController::class, 'create'])->name('reaction.create');
 
 // USER
 Route::get('/users', function () {
