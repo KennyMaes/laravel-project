@@ -3,6 +3,8 @@
 use App\Http\Controllers\NewsArticleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReactionController;
+use App\Http\Controllers\FaqController;
+use App\Models\FaqCategory;
 use App\Models\NewsArticle;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
@@ -48,6 +50,13 @@ Route::get('/news/{id}', function ($id) {
 
 // REACTION
 Route::post('/reaction/{article_id}', [ReactionController::class, 'create'])->name('reaction.create');
+
+//FAQ
+Route::get('/faq', [FaqController::class, 'index'])->name('faq');
+Route::get('/faq/new', function() {
+    $categories = FaqCategory::all();
+    return view('FAQ.new', ['categories' => $categories]);
+})->name('faq-question.new');
 
 // USER
 Route::get('/users', function () {

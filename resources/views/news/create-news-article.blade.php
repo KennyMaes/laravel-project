@@ -21,19 +21,10 @@
                     </div>
                     <x-input-label for="content" :value="__('Content')" />
                     <x-textfield-input id="content" name="content" class="form-group max-w-xl"></x-textfield-input>
-                    <button id="submit-button" class="btn btn-primary">Create article</button>
+                    <button class="btn btn-primary">Create article</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
 @endSection
-
-<script>
-    const contentInput = document.getElementById('content');
-    const submitButton = document.getElementById('submit-button');
-
-    contentInput.addEventListener('input', () => {
-        submitButton.disabled = contentInput.value.trim() === '';
-    });
-</script>
