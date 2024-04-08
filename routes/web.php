@@ -25,12 +25,14 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // NEWS
+// TODO: Add Admin check
 Route::delete('/news/{id}', [NewsArticleController::class, 'destroy'])->name('news-article.delete');
 Route::get('/news', function () {
     $articles = NewsArticle::all();
     return view('news.news-overview', ['articles' => $articles]);
-})->middleware(['auth', 'verified'])->name('news.overview');
+})->name('news.overview');
 
+// TODO: Add admin check
 Route::post('/news', [NewsArticleController::class, 'create'])->name('news-article.create');
 
 Route::get('/news/new', function () {
@@ -47,7 +49,7 @@ Route::put('/news-article/{id}', [NewsArticleController::class, 'update'])->midd
 Route::get('/news/{id}', function ($id) {
     $article = NewsArticle::find($id);
     return view('news.news-article-detail', ['article' => $article]);
-})->middleware(['auth', 'verified'])->name('news-article.get');
+})->name('news-article.get');
 
 // REACTION
 Route::post('/reaction/{article_id}', [ReactionController::class, 'create'])->name('reaction.create');

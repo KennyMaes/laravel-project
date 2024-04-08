@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.guest')
 
 @section('header')
     
@@ -9,16 +9,16 @@
 @endSection
 
 @section('content')
-    
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                @if (auth()->user()->is_admin == true)
-                <div class="p-6">
-                    <a class="btn btn-primary" href="{{ route('news-article.new') }}">Add new article</a>
-                </div>
-                @endif
-                <div class="p-6">
+                
+                @auth
+                    @if (auth()->user()->is_admin == true)
+                    <div class="px-6">
+                        <a class="btn btn-primary" href="{{ route('news-article.new') }}">Add new article</a>
+                    </div>
+                    @endif
+                @endauth
+
+
                     <ul role="list" class="divide-y divide-gray-100">
                         @foreach ($articles as $article)
                             <li class="flex justify-between items-center gap-x-6 py-4">
@@ -36,7 +36,7 @@
                                     </div>
                                 </div>
                                 <div class="hidden flex shrink-0 sm:flex sm:items-end">
-                                    @if (auth()->user()->is_admin == true)
+                                    @if (Auth::check() && auth()->user()->is_admin == true)
                                         <div class="pr-1">
                                             <form action="{{ route('news-article.edit', [ 'id' => $article->id]) }}" method="GET">
                                                 @csrf
@@ -57,10 +57,7 @@
                             </li>
                         @endforeach
                     </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+
 
 @endSection 
 

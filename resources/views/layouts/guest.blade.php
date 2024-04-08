@@ -11,15 +11,20 @@
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
+        <!-- CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </head>
     <body class="font-sans text-gray-900 antialiased">
         <div class="min-h-screen flex flex-col sm:justify-start items-center pt-6 sm:pt-0 bg-gray-100 px-6">
-            @include('layouts.guest-navigation')
+            @include('layouts.navigation')
 
-            <div class="mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg w-full dark:bg-black">
-                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 p-12">
+            <div class="px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg w-full dark:bg-black">
+                <div class="max-w-7xl mx-auto">
                     @yield('content')
                 </div>
             </div>
