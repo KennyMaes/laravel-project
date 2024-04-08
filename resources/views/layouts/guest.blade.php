@@ -16,15 +16,16 @@
     </head>
     <body class="font-sans text-gray-900 antialiased">
         <div class="min-h-screen flex flex-col sm:justify-start items-center pt-6 sm:pt-0 bg-gray-100 px-6">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
-            </div>
+            @include('layouts.guest-navigation')
 
-            <div class="mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg dark:bg-black">
-                {{ $slot }}
+            <div class="mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg w-full dark:bg-black">
+                <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 p-12">
+                    @yield('content')
+                </div>
             </div>
+            <footer class="py-16 text-center text-sm text-black dark:text-white/70">
+                Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
+            </footer>
         </div>
     </body>
 </html>

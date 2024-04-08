@@ -1,9 +1,7 @@
-@extends('layouts.default')
+@extends('layouts.guest')
 
 @section('content')
     <div class="lg:mx-auto">
-
-        <h1 class="text-lg font-semibold leading-7 text-indigo-600">About</h1>
         <p class="mt-8 text-base font-bold tracking-tight text-gray-700 dark:text-white sm:text-4xl">This project is working
             with Vite</p>
         <p class="text-xs">To run this application locally you need to run the following command '<b>npm run start</b>'</p>

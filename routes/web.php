@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Route::get('/about', function () {
     return view('about');
-});
+})->name('about');
 
 // DASHBOARD
 Route::get('/dashboard', function () {

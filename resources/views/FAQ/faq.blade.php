@@ -1,26 +1,19 @@
-@extends('layouts.app')
-
-@section('header')
-    
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('FAQ') }}
-        </h2>
-
-@endSection
+@extends('layouts.guest')
 
 @section('content')
 
 @vite(['resources/js/faq.js'])
     
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            @auth
             <form action="{{ route('faq-question.new') }}" method="GET">
                 @csrf
                 @method('get')
                 <button class="btn btn-primary">Add Question</button>
             </form>
+            @else
+            {{-- No button is shown when not logged in --}}
+            @endif
 
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-4 mt-4">
                 @foreach ($categories as $category)
                 <div class="text-base font-bold text-gray-400">
                     {{ $category->name }}
@@ -66,8 +59,5 @@
 
                 </div>
                 @endforeach
-            </div>
-        </div>
-    </div>
 
 @endSection
