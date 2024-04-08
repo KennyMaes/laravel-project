@@ -57,6 +57,7 @@ Route::get('/faq/new', function() {
     $categories = FaqCategory::all();
     return view('FAQ.new', ['categories' => $categories]);
 })->name('faq-question.new');
+Route::post('/faq', [FaqController::class, 'createQuestion'])->name('faq-question.create');
 
 // USER
 Route::get('/users', function () {

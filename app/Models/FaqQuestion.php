@@ -9,7 +9,7 @@ class FaqQuestion extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['category_id', 'question', 'answer'];
+    protected $fillable = ['faq_category_id', 'question', 'answer'];
 
     public function category()
     {
