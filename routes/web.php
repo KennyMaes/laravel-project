@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FaqCategoryController;
 use App\Http\Controllers\NewsArticleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReactionController;
@@ -55,9 +56,15 @@ Route::post('/reaction/{article_id}', [ReactionController::class, 'create'])->na
 Route::get('/faq', [FaqController::class, 'index'])->name('faq');
 Route::get('/faq/new', function() {
     $categories = FaqCategory::all();
-    return view('FAQ.new', ['categories' => $categories]);
+    return view('FAQ.faq-new', ['categories' => $categories]);
 })->name('faq-question.new');
 Route::post('/faq', [FaqController::class, 'createQuestion'])->name('faq-question.create');
+
+//FAQ Category
+Route::get('/faq/new-category', function() {
+    return view('FAQ.faq-category-new');
+})->name('faq-category.new');
+Route::post('/faq-category', [FaqCategoryController::class, 'create'])->name('faq-category.create');
 
 // USER
 Route::get('/users', function () {
