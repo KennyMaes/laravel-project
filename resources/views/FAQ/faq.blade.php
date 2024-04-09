@@ -34,9 +34,14 @@
                                 <i class="fas fa-edit"></i> Edit
                             </a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">
+                            <form action="{{ route('faq-category.delete', [ 'id' => $category->id]) }}" method="post">
+                              @csrf
+                              @method('delete')
+                              <button class="dropdown-item" href="#" onclick="return confirmAction('Are you sure you want to delete this category with all related questions?')">
                                 <i class="fas fa-trash text-red-400"></i> Delete
-                            </a>
+                              </button>
+                            </form>
+                            
                         </div>
                     </div>
                 </div>

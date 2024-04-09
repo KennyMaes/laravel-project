@@ -25,4 +25,9 @@ class FaqCategoryController extends Controller
 
         return redirect('/faq/new');
     }
+
+    public function delete($id) {
+        FaqCategory::destroy($id);
+        return redirect('/faq');
+    }
 }

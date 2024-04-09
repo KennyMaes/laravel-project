@@ -50,7 +50,7 @@
                                             <form action="{{ route('news-article.delete', [ 'id' => $article->id]) }}" method="POST" id="deleteForm{{ $article->id }}">
                                                 @csrf
                                                 @method('delete')
-                                                <button class="btn btn-danger" onclick="return confirmDelete({{ $article->id }})">
+                                                <button class="btn btn-danger" onclick=" return confirmAction('Are you sure you want to delete this article?')">
                                                     <i class="fas fa-trash"></i>
                                                 </button>
                                             </form>
@@ -64,14 +64,3 @@
 
 
 @endSection 
-
-<script>
-    function confirmDelete(articleId) {
-        if (confirm('Are you sure you want to delete this article?')) {
-            document.getElementById('deleteForm' + articleId).submit();
-            return true;
-        } else {
-            return false;
-        }
-    }
-</script>

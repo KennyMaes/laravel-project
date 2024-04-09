@@ -67,6 +67,7 @@ Route::get('/faq/new-category', function() {
     return view('FAQ.faq-category-new');
 })->name('faq-category.new');
 Route::post('/faq-category', [FaqCategoryController::class, 'create'])->name('faq-category.create');
+Route::delete('/fac-category/{id}', [FaqCategoryController::class, 'delete'])->name('faq-category.delete');
 
 // USER
 Route::get('/users', function () {
