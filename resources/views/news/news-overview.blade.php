@@ -11,7 +11,7 @@
 @section('content')
                 
                 @auth
-                    @if (auth()->user()->is_admin == true)
+                    @if (auth()->user()->isAdmin())
                     <div class="flex justify-end">
                         <a class="btn btn-primary" href="{{ route('news-article.new') }}">Add new article</a>
                     </div>
@@ -36,7 +36,8 @@
                                     </div>
                                 </div>
                                 <div class="hidden flex shrink-0 sm:flex sm:items-end">
-                                    @if (Auth::check() && auth()->user()->is_admin == true)
+                                    @auth
+                                    @if (auth()->user()->isAdmin())
                                         <div class="pr-1">
                                             <form action="{{ route('news-article.edit', [ 'id' => $article->id]) }}" method="GET">
                                                 @csrf
@@ -57,6 +58,7 @@
                                         </div>
                                     
                                     @endif
+                                    @endauth
                                 </div>
                             </li>
                         @endforeach

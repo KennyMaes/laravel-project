@@ -34,12 +34,12 @@
         <div class="min-h-screen flex flex-col sm:justify-start items-center pt-6 sm:pt-0 bg-gray-100 px-6">
             @include('layouts.navigation')
 
-            <div class="px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg w-full dark:bg-black">
+            <div class="px-6 py-4 bg-white dark:bg-black shadow-md overflow-hidden sm:rounded-lg w-full">
                 <div class="max-w-7xl mx-auto">
                     @yield('content')
                 </div>
             </div>
-            <footer class="py-16 text-center text-sm text-black dark:text-white/70">
+            <footer class="py-16 text-center text-sm text-black">
                 Laravel v{{ Illuminate\Foundation\Application::VERSION }} (PHP v{{ PHP_VERSION }})
             </footer>
         </div>

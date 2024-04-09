@@ -1,10 +1,10 @@
 @extends('layouts.guest')
 
 @section('content')
-    @vite(['resources/js/faq.js', 'resources/js/FAQ/faq-overview-page.js'])
 
     <div class="pb-16">
       @auth
+      @if(auth()->user()->isAdmin())
         <div class="flex justify-end gap-2">
             <form action="{{ route('faq-question.new') }}" method="GET">
                 @csrf
@@ -15,6 +15,7 @@
 
             </form>
         </div>
+        @endif
     @else
         {{-- No button is shown when not logged in --}}
         @endif
@@ -56,7 +57,7 @@
                             <h2 class="mb-0 grow" id="headingOne">
                                 <div class="flex justify-between">
                                     <button
-                                        class="grouprelative flex w-full items-center rounded-t-lg border-0 bg-white py-1 text-left text-sm text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none dark:bg-body-dark dark:text-white [&:not([data-twe-collapse-collapsed])]:bg-white [&:not([data-twe-collapse-collapsed])]:text-primary [&:not([data-twe-collapse-collapsed])]:shadow-border-b dark:[&:not([data-twe-collapse-collapsed])]:bg-surface-dark dark:[&:not([data-twe-collapse-collapsed])]:text-primary dark:[&:not([data-twe-collapse-collapsed])]:shadow-white/10 "
+                                        class="grouprelative flex w-full items-center rounded-t-lg border-0 bg-white py-1 text-left text-sm text-neutral-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none dark:bg-body-dark [&:not([data-twe-collapse-collapsed])]:bg-white [&:not([data-twe-collapse-collapsed])]:text-primary [&:not([data-twe-collapse-collapsed])]:shadow-border-b dark:[&:not([data-twe-collapse-collapsed])]:bg-surface-dark dark:[&:not([data-twe-collapse-collapsed])]:text-primary dark:[&:not([data-twe-collapse-collapsed])]:shadow-white/10 "
                                         type="button" aria-expanded="true">
                                         {{ $question->question }}
 
