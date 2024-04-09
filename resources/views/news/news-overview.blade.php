@@ -42,8 +42,8 @@
                                             <form action="{{ route('news-article.edit', [ 'id' => $article->id]) }}" method="GET">
                                                 @csrf
                                                 @method('get')
-                                                <button class="btn btn-secondary">
-                                                    <i class="fas fa-pen"></i>
+                                                <button class="btn bg-indigo-500">
+                                                    <i class="fas fa-pen text-white"></i>
                                                 </button>
                                             </form>
                                         </div>
