@@ -12,7 +12,7 @@
                 
                 @auth
                     @if (auth()->user()->is_admin == true)
-                    <div class="px-6">
+                    <div class="flex justify-end">
                         <a class="btn btn-primary" href="{{ route('news-article.new') }}">Add new article</a>
                     </div>
                     @endif
@@ -30,7 +30,7 @@
                                         <div class="line-clamp-2">
                                             {{ $article->content }}
                                         </div>
-                                        <div class="font-bold text-orange-400">
+                                        <div class="font-bold text-indigo-400">
                                             {{ $article->created_at }}
                                         </div>
                                     </div>
@@ -41,14 +41,18 @@
                                             <form action="{{ route('news-article.edit', [ 'id' => $article->id]) }}" method="GET">
                                                 @csrf
                                                 @method('get')
-                                                <button class="btn btn-secondary">Edit</button>
+                                                <button class="btn btn-secondary">
+                                                    <i class="fas fa-pen"></i>
+                                                </button>
                                             </form>
                                         </div>
                                         <div>
                                             <form action="{{ route('news-article.delete', [ 'id' => $article->id]) }}" method="POST" id="deleteForm{{ $article->id }}">
                                                 @csrf
                                                 @method('delete')
-                                                <button class="btn btn-danger" onclick="return confirmDelete({{ $article->id }})">Delete</button>
+                                                <button class="btn btn-danger" onclick="return confirmDelete({{ $article->id }})">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
                                             </form>
                                         </div>
                                     

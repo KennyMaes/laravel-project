@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
             const isExpanded = accordionBody.classList.contains('hidden') ? false : true;
             this.setAttribute('aria-expanded', isExpanded.toString());
 
-            console.log('is Expanded ' + isExpanded);
 
             // Get the SVG element within the accordion body
             const svgElement = this.querySelector('svg');
