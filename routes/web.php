@@ -5,8 +5,6 @@ use App\Http\Controllers\NewsArticleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReactionController;
 use App\Http\Controllers\FaqController;
-use App\Models\FaqCategory;
-use App\Models\NewsArticle;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 
@@ -25,47 +23,41 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // NEWS
-Route::get('/news', function () {
-    $articles = NewsArticle::all();
-    return view('news.news-overview', ['articles' => $articles]);
-})->name('news.overview');
-Route::get('/news/new', function () {
-    return view('news.create-news-article');
-})->middleware(['auth', 'verified', 'admin'])->name('news-article.new');
+Route::get('/news', [NewsArticleController::class, 'findAll'])->name('news.overview');
 
-Route::post('/news', [NewsArticleController::class, 'create'])->middleware(['auth', 'admin'])->name('news-article.create');
-Route::delete('/news/{id}', [NewsArticleController::class, 'destroy'])->middleware(['auth', 'admin'])->name('news-article.delete');
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/news/new', [NewsArticleController::class, 'createArticleView'])->name('news-article.new');
+    Route::get('/news/edit/{id}', [NewsArticleController::class, 'updateArticleView'])->name('news-article.edit');
+    Route::post('/news', [NewsArticleController::class, 'create'])->name('news-article.create');
+    Route::put('/news-article/{id}', [NewsArticleController::class, 'update'])->name('news-article.update');
+    Route::delete('/news/{id}', [NewsArticleController::class, 'destroy'])->name('news-article.delete');
+});
 
+Route::get('/news/{id}', [NewsArticleController::class, 'findById'])->name('news-article.get');
 
-Route::get('/news/{id}/edit', function ($id) {
-    $article = NewsArticle::find($id);
-    return view('news.update-news-article', ['article' => $article]);
-})->middleware(['auth', 'verified', 'admin'])->name('news-article.edit');
-Route::get('/news/{id}', function ($id) {
-    $article = NewsArticle::find($id);
-    return view('news.news-article-detail', ['article' => $article]);
-})->name('news-article.get');
-
-Route::put('/news-article/{id}', [NewsArticleController::class, 'update'])->middleware(['auth', 'verified', 'admin'])->name('news-article.update');
 
 // REACTION
 Route::post('/reaction/{article_id}', [ReactionController::class, 'create'])->name('reaction.create');
 
 //FAQ
 Route::get('/faq', [FaqController::class, 'index'])->name('faq');
-Route::get('/faq/new', function() {
-    $categories = FaqCategory::all();
-    return view('FAQ.faq-new', ['categories' => $categories]);
-})->name('faq-question.new');
-Route::post('/faq', [FaqController::class, 'createQuestion'])->name('faq-question.create');
-Route::delete('/fac/{id}', [FaqController::class, 'delete'])->middleware(['auth', 'admin'])->name('faq.delete');
+Route::get('/faq/new', [FaqController::class, 'createQuestionView'])->name('faq-question.new');
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/faq/{id}', [FaqController::class, 'editView'])->name('faq.edit');
+    Route::post('/faq', [FaqController::class, 'createQuestion'])->name('faq.create');
+    Route::put('/faq/{id}', [FaqController::class, 'updateQuestion'])->name('faq.update');
+    Route::delete('/fac/{id}', [FaqController::class, 'delete'])->name('faq.delete');
+});
 
 //FAQ Category
-Route::get('/faq/new-category', function() {
-    return view('FAQ.faq-category-new');
-})->name('faq-category.new');
-Route::post('/faq-category', [FaqCategoryController::class, 'create'])->name('faq-category.create');
-Route::delete('/fac-category/{id}', [FaqCategoryController::class, 'delete'])->middleware(['auth', 'admin'])->name('faq-category.delete');
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('/faq/category/new', function() {
+        return view('FAQ.faq-category-new');
+    })->name('faq-category.new');
+    Route::post('/faq-category', [FaqCategoryController::class, 'create'])->name('faq-category.create');
+    Route::delete('/fac-category/{id}', [FaqCategoryController::class, 'delete'])->name('faq-category.delete');
+});
 
 // USER
 Route::get('/users', function () {

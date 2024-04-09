@@ -27,9 +27,39 @@ class FaqController extends Controller
         return redirect('/faq');
     }
 
+    public function updateQuestion($id) 
+    {
+        $question = FaqQuestion::find($id);
+
+        $validatedData = request()->validate([
+            'faq_category_id' => 'required',
+            'question' => 'required',
+            'answer' => 'required'
+        ]);
+
+        error_log($question);
+
+        $question->fill($validatedData);
+        $question->save();
+        return redirect('/faq');
+    }
+
     public function delete($id) 
     {
         FaqQuestion::destroy($id);
         return redirect('/faq');
+    }
+
+    public function createQuestionView()
+    {
+        $categories = FaqCategory::all();
+        return view('FAQ.faq-form', ['categories' => $categories]);
+    }
+
+    public function editView($id)
+    {
+        $categories = FaqCategory::all();
+        $question = FaqQuestion::find($id);
+        return view('FAQ.faq-form', ['categories' => $categories, 'question' => $question]);
     }
 }

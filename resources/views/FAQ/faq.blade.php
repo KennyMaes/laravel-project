@@ -1,6 +1,7 @@
 @extends('layouts.guest')
 
 @section('content')
+    @vite(['resources/js/faq.js'])
     <div class="pb-16">
         @auth
             @if (auth()->user()->isAdmin())
@@ -54,7 +55,7 @@
 
 
                     @foreach ($category->questions as $question)
-                        <div class="flex align-items-center">
+                        <div class="flex">
                             <div class="grow">
                                 <div class="accordion-header flex justify-between align-items-center">
                                     <h2 class="mb-0 grow" id="headingOne">
@@ -74,7 +75,6 @@
                                                 </svg>
                                             </span>
                                         </div>
-
                                     </h2>
                                 </div>
                                 <div id="collapseOne" class="!visible hidden" data-twe-collapse-item data-twe-collapse-show
@@ -93,18 +93,22 @@
                                         </button>
                                         <div class="dropdown-menu" aria-labelledby="optionsMenu">
                                             <!-- Dropdown menu links -->
-                                            <a class="dropdown-item" href="#">
-                                                <i class="fas fa-edit"></i> Edit
-                                            </a>
-                                            <div class="dropdown-divider"></div>
-                                            <form action="{{ route('faq.delete', ['id' => $question->id]) }}" method="post">
+                                            <form action="{{ route('faq.edit', ['id' => $question->id]) }}" method="get">
                                               @csrf
-                                              @method('delete')
-                                              <button class="dropdown-item" href="#"
-                                                  onclick="return confirmAction('Are you sure you want to delete this questions?')">
-                                                  <i class="fas fa-trash text-red-400"></i> Delete
+                                              @method('get')
+                                              <button class="dropdown-item">
+                                                  <i class="fas fa-pen"></i> Edit
                                               </button>
                                           </form>
+                                            <div class="dropdown-divider"></div>
+                                            <form action="{{ route('faq.delete', ['id' => $question->id]) }}" method="post">
+                                                @csrf
+                                                @method('delete')
+                                                <button class="dropdown-item" href="#"
+                                                    onclick="return confirmAction('Are you sure you want to delete this questions?')">
+                                                    <i class="fas fa-trash text-red-400"></i> Delete
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
                                 @endif
@@ -112,7 +116,6 @@
                         </div>
                     @endforeach
                     <div class="border-b border-gray-200 my-2"></div>
-
                 </div>
             @endforeach
         </div>

@@ -22,6 +22,16 @@ class NewsArticleController extends Controller
         return redirect('/news');
     }
 
+    public function findById($id) {
+        $article = NewsArticle::find($id);
+        return view('news.news-article-detail', ['article' => $article]);
+    }
+
+    public function updateArticleView($id) {
+        $article = NewsArticle::find($id);
+        return view('news.update-news-article', ['article' => $article]);
+    }
+
     public function update($id) {
         $newsArticle = NewsArticle::findOrFail($id);
         $newsArticle->fill(request()->all());
@@ -33,5 +43,14 @@ class NewsArticleController extends Controller
     public function destroy($id) {
         NewsArticle::destroy($id);
         return redirect('/news');
+    }
+
+    public function findAll() {
+        $articles = NewsArticle::all();
+        return view('news.news-overview', ['articles' => $articles]);
+    }
+
+    public function createArticleView() {
+        return view('news.create-news-article');
     }
 }
