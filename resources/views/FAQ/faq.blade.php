@@ -33,9 +33,13 @@
                                     </button>
                                     <div class="dropdown-menu" aria-labelledby="optionsMenu">
                                         <!-- Dropdown menu links -->
-                                        <a class="dropdown-item" href="#">
-                                            <i class="fas fa-edit"></i> Edit
-                                        </a>
+                                        <form action="{{ route('faq-category.edit', ['id' => $category->id]) }}" method="get">
+                                          @csrf
+                                          @method('get')
+                                          <button class="dropdown-item">
+                                              <i class="fas fa-pen"></i> Edit
+                                          </button>
+                                      </form>
                                         <div class="dropdown-divider"></div>
                                         <form action="{{ route('faq-category.delete', ['id' => $category->id]) }}" method="post">
                                             @csrf

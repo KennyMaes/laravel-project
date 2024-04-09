@@ -5,6 +5,7 @@ use App\Http\Controllers\NewsArticleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReactionController;
 use App\Http\Controllers\FaqController;
+use App\Models\FaqCategory;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
 
@@ -53,9 +54,14 @@ Route::middleware(['auth', 'admin'])->group(function () {
 //FAQ Category
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/faq/category/new', function() {
-        return view('FAQ.faq-category-new');
+        return view('FAQ.faq-category-form');
     })->name('faq-category.new');
+    Route::get('/faq/category/{id}', function($id) {
+        $category = FaqCategory::find($id);
+        return view('FAQ.faq-category-form', ['category' => $category]);
+    })->name('faq-category.edit');
     Route::post('/faq-category', [FaqCategoryController::class, 'create'])->name('faq-category.create');
+    Route::put('/faq-category/{id}', [FaqCategoryController::class, 'update'])->name('faq-category.update');
     Route::delete('/fac-category/{id}', [FaqCategoryController::class, 'delete'])->name('faq-category.delete');
 });
 
