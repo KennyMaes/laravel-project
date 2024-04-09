@@ -61,6 +61,7 @@ Route::get('/faq/new', function() {
     return view('FAQ.faq-new', ['categories' => $categories]);
 })->name('faq-question.new');
 Route::post('/faq', [FaqController::class, 'createQuestion'])->name('faq-question.create');
+Route::delete('/fac/{id}', [FaqController::class, 'delete'])->name('faq.delete');
 
 //FAQ Category
 Route::get('/faq/new-category', function() {

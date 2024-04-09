@@ -26,4 +26,10 @@ class FaqController extends Controller
         FaqQuestion::create($incomingFields);
         return redirect('/faq');
     }
+
+    public function delete($id) 
+    {
+        FaqQuestion::destroy($id);
+        return redirect('/faq');
+    }
 }
