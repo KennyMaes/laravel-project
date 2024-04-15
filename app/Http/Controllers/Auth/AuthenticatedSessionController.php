@@ -7,6 +7,8 @@ use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
@@ -16,6 +18,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
+        Session::put('previousUrl', url()->previous());
         return view('auth.login');
     }
 
@@ -28,7 +31,10 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        $previousUrl = Session::get('previousUrl');
+
+        // Redirect the user to the previous URL if it exists, otherwise to a default route
+        return Redirect::to($previousUrl ? $previousUrl : 'dashboard');
     }
 
     /**
