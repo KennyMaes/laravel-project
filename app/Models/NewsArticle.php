@@ -15,6 +15,6 @@ class NewsArticle extends Model
 
     public function reactions()
     {
-        return $this->hasMany(Reaction::class);
+        return $this->hasMany(Reaction::class)->orderBy('created_at', 'desc');
     }
 }

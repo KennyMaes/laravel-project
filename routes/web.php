@@ -71,6 +71,10 @@ Route::get('/contact-form', function() {
     return view('contact.contact-form');
 })->name('contact-form.view');
 Route::post('/contact-form', [ContactRequestController::class, 'post'])->name('contact-form.post');
+Route::middleware((['auth', 'admin']))->group(function() {
+    Route::get('/contact-form/overview', [ContactRequestController::class, 'overview'])->name('contact-requests.overview');
+});
+
 
 // USER
 Route::get('/users', function () {

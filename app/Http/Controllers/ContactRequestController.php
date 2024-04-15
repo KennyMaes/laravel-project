@@ -17,4 +17,10 @@ class ContactRequestController extends Controller
 
         return view('contact.contact-form-success');
     }
+
+    public function overview() {
+        $contactRequests = ContactRequest::all();
+
+        return view('contact.contact-overview', ['contactRequests' => $contactRequests]);
+    }
 }
