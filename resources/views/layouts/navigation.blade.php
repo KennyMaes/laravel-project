@@ -23,6 +23,9 @@
                         <x-nav-link :href="route('news.overview')" :active="request()->routeIs('news.overview')">
                             {{ __('News') }}
                         </x-nav-link>
+                        <x-nav-link :href="route('contact-form.view')" :active="request()->routeIs('contact-form.view')">
+                            {{ __('Contact') }}
+                        </x-nav-link>
                         <x-nav-link :href="route('users')" :active="request()->routeIs('users')">
                             {{ __('Users') }}
                         </x-nav-link>
@@ -124,6 +127,9 @@
                             </x-nav-link>
                             <x-nav-link :href="route('news.overview')" :active="request()->routeIs('news.overview')">
                                 {{ __('News') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('contact-form.view')" :active="request()->routeIs('contact-form.view')">
+                                {{ __('Contact') }}
                             </x-nav-link>
                         </div>
                         {{-- Login and Registration --}}

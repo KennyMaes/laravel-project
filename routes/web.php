@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactRequestController;
 use App\Http\Controllers\FaqCategoryController;
 use App\Http\Controllers\NewsArticleController;
 use App\Http\Controllers\ProfileController;
@@ -40,7 +41,7 @@ Route::get('/news/{id}', [NewsArticleController::class, 'findById'])->name('news
 // REACTION
 Route::post('/reaction/{article_id}', [ReactionController::class, 'create'])->name('reaction.create');
 
-//FAQ
+// FAQ
 Route::get('/faq', [FaqController::class, 'index'])->name('faq');
 Route::get('/faq/new', [FaqController::class, 'createQuestionView'])->name('faq-question.new');
 
@@ -51,7 +52,7 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::delete('/fac/{id}', [FaqController::class, 'delete'])->name('faq.delete');
 });
 
-//FAQ Category
+// FAQ Category
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/faq/category/new', function() {
         return view('FAQ.faq-category-form');
@@ -64,6 +65,12 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::put('/faq-category/{id}', [FaqCategoryController::class, 'update'])->name('faq-category.update');
     Route::delete('/fac-category/{id}', [FaqCategoryController::class, 'delete'])->name('faq-category.delete');
 });
+
+// COTACT-FORM
+Route::get('/contact-form', function() {
+    return view('contact.contact-form');
+})->name('contact-form.view');
+Route::post('/contact-form', [ContactRequestController::class, 'post'])->name('contact-form.post');
 
 // USER
 Route::get('/users', function () {
