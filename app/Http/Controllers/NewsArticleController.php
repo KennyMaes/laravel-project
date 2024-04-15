@@ -47,7 +47,6 @@ class NewsArticleController extends Controller
     }
 
     public function findAll() {
-        error_log('Test 123');
         $articles = NewsArticle::all();
         return view('news.news-overview', ['articles' => $articles]);
     }

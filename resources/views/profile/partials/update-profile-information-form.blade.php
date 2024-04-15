@@ -47,10 +47,15 @@
             @endif
         </div>
 
-        <div>
-            <x-input-label for="image" :value="__('Profile Image')" />
-            <x-text-input id="image" name="image" type="file" class="mt-1 block w-full" :value="old('image', $user->image)"></x-text-input>
+        <div class="flex gap-8 align-items-center">
+            <div>
+                <x-input-label for="avatar" :value="__('Profile Image')" />
+                <x-text-input id="avatar" name="avatar" type="file" class="mt-1 block w-full" :value="old('avatar', $user->image)"></x-text-input>
+            </div>
+            <img class="w-20" src="{{ asset('avatars/' . ($user->image != null ? $user->image : 'avatar.png')) }}" alt="Avatar">
         </div>
+        
+        
 
         <div class="flex items-center gap-4">
             <x-primary-button>{{ __('Save') }}</x-primary-button>

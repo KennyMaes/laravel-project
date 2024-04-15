@@ -31,22 +31,19 @@ class ProfileController extends Controller
     {
         $validatedData = $request->user()->fill($request->validated());
 
+        error_log("$request->image");
+
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
 
+        if ($request->avatar) {
+            $imageName = time().'.'.$request->avatar->extension();  
+            $request->avatar->move(public_path('avatars'), $imageName);
+            $request->user()['image'] = $imageName;
+        }
+
         $request->user()->save();
-
-        // if ($user->id != auth()->id()) {
-
-        // unset($validatedData['name']);
-        // unset($validatedData['email']);
-    
-
-        // // Update the user's fields
-        // $user->fill($validatedData);
-        // $user->save();
-        // }
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
