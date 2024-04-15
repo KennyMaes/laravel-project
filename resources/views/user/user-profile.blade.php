@@ -9,21 +9,23 @@
 @section('content')
 <div class=" px-12 max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-    <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+    <form method="post" action="{{ route('profile.update', ['user' => $user] ) }}" class="mt-6 space-y-6">
         @csrf
         @method('patch')
-
+        @if($currentUser['id'] != $user['id'])
+        <div>{{ $user->name }}</div>
+        <div>{{ $user->email }}</div>
+        @else
         <div>
             <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" disabled="{{ $currentUser['id'] !== $user['id']}}" name="name" type="text" class="mt-1 block w-lg" :value="old('name', $user->name)" required autofocus autocomplete="name" />
+            <x-text-input id="name" disabled="{{ $currentUser['id'] !== $user['id']}}" name="name" type="text" class="mt-1 block w-lg" :value="$user->name" autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
         <div>
             <x-input-label for="email" :value="__('Email')"/>
-            <x-text-input id="email" disabled="{{ $currentUser['id'] !== $user['id']}}" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username"/>
+            <x-text-input id="email" disabled="{{ $currentUser['id'] !== $user['id']}}" name="email" type="email" class="mt-1 block w-full" :value="$user->email" autocomplete="username"/>
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
-
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
                 <div>
                     <p class="text-sm mt-2 text-gray-800">
@@ -42,29 +44,7 @@
                 </div>
             @endif
         </div>
-
-        <div style="display: inline-block;">
-            <input type="radio" name="role" id="adminRadio" value="admin">
-            <label for="adminRadio">Admin</label>
-          </div>
-          <div style="display: inline-block;">
-            <input type="radio" name="role" id="userRadio" value="user" checked>
-            <label for="userRadio">User</label>
-          </div>
-
-        <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
-
-            @if (session('status') === 'profile-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600"
-                >{{ __('Saved.') }}</p>
-            @endif
-        </div>
+        @endif
     </form>
 </div>
 

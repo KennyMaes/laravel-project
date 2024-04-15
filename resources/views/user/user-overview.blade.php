@@ -26,6 +26,11 @@
                                 <div class="hidden shrink-0 sm:flex sm:flex-col sm:items-end">
                                     @if ($currentUser->is_admin == true && $currentUser['id'] !== $user['id'])
                                         <div class="flex gap-1">
+                                            <form action="{{ route("users.toggle-admin", ['id' => $user['id']])}}" method="POST">
+                                                @csrf
+                                                @method('patch')
+                                                <button class="btn {{$user->isAdmin() ? 'btn-warning' : 'btn-primary'}}" data-bs-toggle="tooltip" title="Tooltip content" data-toggle="modal">{{ $user->isAdmin() ? 'Make User' : 'Make Admin' }}</button>
+                                            </form>
                                             <button class="btn btn-danger" data-toggle="modal" data-target="#deleteModal" data-id="{{ $user->id }}" data-username="{{ $user->name }}">Delete</button>
                                         </div>
                                     @endif

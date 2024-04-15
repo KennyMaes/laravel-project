@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\NewsArticle;
 use Illuminate\Http\Request;
-use Psy\Readline\Hoa\Console;
+use Illuminate\Support\Facades\Log;
+
 
 class NewsArticleController extends Controller
 {
@@ -46,6 +47,7 @@ class NewsArticleController extends Controller
     }
 
     public function findAll() {
+        error_log('Test 123');
         $articles = NewsArticle::all();
         return view('news.news-overview', ['articles' => $articles]);
     }

@@ -87,7 +87,15 @@ Route::get('/users/{id}', function (string $id) {
     $user = User::find($id);
     $currentUser = Auth::user();
     return view('user.user-profile', ['user' => $user, 'currentUser' => $currentUser]);
-})->middleware(['auth'])->name('users.profile');        
+})->middleware(['auth'])->name('users.profile');  
+
+Route::patch('/users/{id}/', function (string $id) {
+    $user = User::find($id);
+    $user['is_admin'] = !$user['is_admin'];
+    $user->save();
+
+    return redirect('/users');
+})->middleware(['auth', 'admin'])->name('users.toggle-admin');    
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
