@@ -9,7 +9,10 @@
                     <div class="text-lg grow text-indigo-800 font-bold">{{ $article['title'] }}</div>
                     <div class="text-indigo-400">{{ 'Created at: ' . $article->created_at }}</div>
                 </div>
-                <div class="text-gray-800">
+                <div class="flex justify-center">
+                    <img class="w-80" src="{{ asset('newsArticleCovers/' . ($article->cover_image != null ? $article->cover_image : 'placeholder.jpg')) }}" alt="Avatar">
+                </div>
+                <div class="text-gray-800 text-center pt-4">
                     {{ $article->content }}
                 </div>
                 <div class="divide-y divide-gray-900"></div>

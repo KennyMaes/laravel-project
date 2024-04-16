@@ -20,3 +20,5 @@ yarn-error.log
 .DS_Store
 /public/avatars/*
 !/public/avatars/avatar.png
+/public/newsArticleCovers/*
+!/public/newsArticleCovers/placeholder.jpg

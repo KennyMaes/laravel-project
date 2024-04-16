@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->longText('content');
             $table->foreignId('user_id')->constrained();
-            $table->uuid('cover_image_uuid')->nullable();
+            $table->string('cover_image')->nullable();
         });
     }
 

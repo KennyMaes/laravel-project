@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
-use App\Http\Requests\ProfileUpdateRoleRequest;
-use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -31,14 +29,12 @@ class ProfileController extends Controller
     {
         $validatedData = $request->user()->fill($request->validated());
 
-        error_log("$request->image");
-
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
 
         if ($request->avatar) {
-            $imageName = time().'.'.$request->avatar->extension();  
+            $imageName = Str::uuid().'.'.$request->avatar->extension();  
             $request->avatar->move(public_path('avatars'), $imageName);
             $request->user()['image'] = $imageName;
         }

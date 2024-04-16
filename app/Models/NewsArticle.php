@@ -11,7 +11,7 @@ class NewsArticle extends Model
 
     protected $table = 'news_article';
 
-    protected $fillable = ['title', 'content', 'user_id'];
+    protected $fillable = ['title', 'content', 'user_id', 'cover_image'];
 
     public function reactions()
     {
