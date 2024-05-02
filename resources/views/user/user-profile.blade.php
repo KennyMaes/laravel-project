@@ -7,45 +7,47 @@
 @endSection
 
 @section('content')
-<div class=" px-12 max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
 
-    <form method="post" action="{{ route('profile.update', ['user' => $user] ) }}" class="mt-6 space-y-6">
-        @csrf
-        @method('patch')
-        @if($currentUser['id'] != $user['id'])
-        <div>{{ $user->name }}</div>
-        <div>{{ $user->email }}</div>
-        @else
-        <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" disabled="{{ $currentUser['id'] !== $user['id']}}" name="name" type="text" class="mt-1 block w-lg" :value="$user->name" autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
-        </div>
+                    <div class="flex align-items-center gap-5">
+                        <img class="h-20 w-20 flex-none rounded-full bg-gray-50"
+                            src="{{ asset('avatars/' . ($user->image != null ? $user->image : 'avatar.png')) }}"
+                            alt="Avatar">
+                        <div>
+                            <div class="flex align-items-center gap-2">
+                                <div class="text-lg font-semibold">{{ $user->name }}</div>
+                                <div class="text-sm">({{ $user->username }})</div>
+                            </div>
+                            <div>{{ $user->email }}</div>
+                        </div>
+                    </div>
 
-        <div>
-            <x-input-label for="email" :value="__('Email')"/>
-            <x-text-input id="email" disabled="{{ $currentUser['id'] !== $user['id']}}" name="email" type="email" class="mt-1 block w-full" :value="$user->email" autocomplete="username"/>
-            <x-input-error class="mt-2" :messages="$errors->get('email')" />
-            @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
-                <div>
-                    <p class="text-sm mt-2 text-gray-800">
-                        {{ __('Your email address is unverified.') }}
+                    <div class="pt-5">
+                        <div class="text-lg font-semibold">Birthdate</div>
+                        @if (isset($user->birthdate) && !empty($user->birthdate))
+                        <div class="text-sm">{{ $user->birthdate }}</div>
+                        @else
+                            <p>The user has not set a birthdate</p>
+                        @endif
+                        
 
-                        <button form="send-verification" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                            {{ __('Click here to re-send the verification email.') }}
-                        </button>
-                    </p>
+                    </div>
 
-                    @if (session('status') === 'verification-link-sent')
-                        <p class="mt-2 font-medium text-sm text-green-600">
-                            {{ __('A new verification link has been sent to your email address.') }}
-                        </p>
-                    @endif
+                    <div class="pt-5">
+                        <div class="text-lg font-semibold">Biography</div>
+                        @if (isset($user->biografie) && !empty($user->biografie))
+                        <div class="text-sm">{{ $user->biografie }}</div>
+                        @else
+                            <p>The user has not set a biography</p>
+                        @endif
+                    </div>
+
+
                 </div>
-            @endif
+            </div>
         </div>
-        @endif
-    </form>
-</div>
-
+    </div>
 @endSection
