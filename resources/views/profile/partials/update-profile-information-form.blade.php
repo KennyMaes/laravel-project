@@ -24,6 +24,16 @@
         </div>
 
         <div>
+            <x-input-label for="username" :value="__('Username')" />
+            <x-text-input id="username" name="username" type="text" class="mt-1 block w-full" :value="old('username', $user->username)"/>
+        </div>
+
+        <div>
+            <x-input-label for="birthdate" :value="__('Birthdate')" />
+            <x-text-input id="birthdate" name="birthdate" type="date" class="mt-1 block w-full" :value="old('birthdate', $user->birthdate)"/>
+        </div>
+
+        <div>
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
@@ -53,6 +63,11 @@
                 <x-text-input id="avatar" name="avatar" type="file" class="mt-1 block w-full" :value="old('avatar', $user->image)"></x-text-input>
             </div>
             <img class="w-20" src="{{ asset('avatars/' . ($user->image != null ? $user->image : 'avatar.png')) }}" alt="Avatar">
+        </div>
+
+        <div>
+            <x-input-label for="biography" :value="__('Biography')" />
+            <x-textfield-input id="biography" name="biografie" class="mt-1 block w-full">{{ $user->biografie }}</x-textfield-input>
         </div>
         
         
