@@ -21,7 +21,7 @@ Route::get('/about', function () {
 
 // DASHBOARD
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('dashboard', ['user' => Auth::user()]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // NEWS
@@ -87,7 +87,7 @@ Route::get('/users/{id}', function (string $id) {
     $user = User::find($id);
     $currentUser = Auth::user();
     return view('user.user-profile', ['user' => $user, 'currentUser' => $currentUser]);
-})->middleware(['auth'])->name('users.profile');  
+})->middleware(['auth'])->name('users.profile');
 
 Route::patch('/users/{id}/', function (string $id) {
     $user = User::find($id);
@@ -95,7 +95,7 @@ Route::patch('/users/{id}/', function (string $id) {
     $user->save();
 
     return redirect('/users');
-})->middleware(['auth', 'admin'])->name('users.toggle-admin');    
+})->middleware(['auth', 'admin'])->name('users.toggle-admin');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

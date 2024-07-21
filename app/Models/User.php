@@ -53,4 +53,9 @@ class User extends Authenticatable
     public function isAdmin() {
         return $this->is_admin == true;
     }
+
+    public function newsArticles()
+    {
+        return $this->belongsToMany(NewsArticle::class);
+    }
 }

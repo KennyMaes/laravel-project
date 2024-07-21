@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\NewsArticle;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
 
 class NewsArticleController extends Controller
@@ -20,18 +22,21 @@ class NewsArticleController extends Controller
         $incomingFields['content'] = strip_tags($incomingFields['content']);
         $incomingFields['user_id'] = auth()->id();
 
-        
+
 
 
         if (isset($incomingFields['cover_image'])) {
             error_log('Image exists');
             $coverImage = $incomingFields['cover_image'];
-            $imageName = time().'.'.$coverImage->extension();  
+            $imageName = time().'.'.$coverImage->extension();
             $coverImage->move(public_path('newsArticleCovers'), $imageName);
             $incomingFields['cover_image'] = $imageName;
         }
 
-        NewsArticle::create($incomingFields);
+            $newsArticle = NewsArticle::create($incomingFields);
+            $user = User::find(auth()->id());
+            $user->newsArticles()->attach($newsArticle);
+
         return redirect('/news');
     }
 
@@ -60,13 +65,16 @@ class NewsArticleController extends Controller
 
         if (isset($incomingFields['cover_image'])) {
             $coverImage = $incomingFields['cover_image'];
-            $imageName = Str::uuid().'.'.$coverImage->extension();  
+            $imageName = Str::uuid().'.'.$coverImage->extension();
             $coverImage->move(public_path('newsArticleCovers'), $imageName);
             $incomingFields['cover_image'] = $imageName;
         }
 
         $newsArticle->fill($incomingFields);
         $newsArticle->save();
+        $user = User::find(auth()->id());
+        $user->newsArticles()->syncWithoutDetaching([$newsArticle->id]);
+
 
         return redirect('/news');
     }

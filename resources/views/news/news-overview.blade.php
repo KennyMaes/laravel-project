@@ -1,7 +1,7 @@
 @extends('layouts.guest')
 
 @section('header')
-    
+
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('News articles') }}
         </h2>
@@ -9,7 +9,7 @@
 @endSection
 
 @section('content')
-                
+
                 @auth
                     @if (auth()->user()->isAdmin())
                     <div class="flex justify-end">
@@ -37,35 +37,35 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="hidden flex shrink-0 sm:flex sm:items-end">
-                                    @auth
-                                    @if (auth()->user()->isAdmin())
-                                        <div class="pr-1">
-                                            <form action="{{ route('news-article.edit', [ 'id' => $article->id]) }}" method="GET">
-                                                @csrf
-                                                @method('get')
-                                                <button class="btn bg-indigo-500">
-                                                    <i class="fas fa-pen text-white"></i>
-                                                </button>
-                                            </form>
-                                        </div>
-                                        <div>
-                                            <form action="{{ route('news-article.delete', [ 'id' => $article->id]) }}" method="POST" id="deleteForm{{ $article->id }}">
-                                                @csrf
-                                                @method('delete')
-                                                <button class="btn btn-danger" onclick=" return confirmAction('Are you sure you want to delete this article?')">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </form>
-                                        </div>
-                                    
-                                    @endif
-                                    @endauth
-                                </div>
-                            </li>
-                        @endforeach
+                                    </div>
+                                    <div class="hidden flex shrink-0 sm:flex sm:items-end">
+                                        @auth
+                                        @if (auth()->user()->isAdmin())
+                                            <div class="pr-1">
+                                                <form action="{{ route('news-article.edit', [ 'id' => $article->id]) }}" method="GET">
+                                                    @csrf
+                                                    @method('get')
+                                                    <button class="btn bg-indigo-500">
+                                                        <i class="fas fa-pen text-white"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+                                            <div>
+                                                <form action="{{ route('news-article.delete', [ 'id' => $article->id]) }}" method="POST" id="deleteForm{{ $article->id }}">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button class="btn btn-danger" onclick=" return confirmAction('Are you sure you want to delete this article?')">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
+                                            </div>
+
+                                        @endif
+                                        @endauth
+                                    </div>
+                                </li>
+                            @endforeach
                     </ul>
 
 
-@endSection 
+@endSection

@@ -7,7 +7,16 @@
             <div class="p-6 bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="flex align-items-center jusify-between pb-4">
                     <div class="text-lg grow text-indigo-800 font-bold">{{ $article['title'] }}</div>
-                    <div class="text-indigo-400">{{ 'Created at: ' . $article->created_at }}</div>
+                    <div>
+                        <div class="text-indigo-400">{{ 'Created at: ' . $article->created_at }}</div>
+                        <div class="text-indigo-400">
+                            Authors:
+                            @foreach ($article->users as $user)
+                            {{ $user->username }}
+                            @if (!$loop->last), @endif
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
                 <div class="flex justify-center">
                     <img class="w-80" src="{{ asset('newsArticleCovers/' . ($article->cover_image != null ? $article->cover_image : 'placeholder.jpg')) }}" alt="Avatar">
