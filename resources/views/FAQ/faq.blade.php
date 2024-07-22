@@ -2,7 +2,7 @@
 
 @section('header')
     {{ __('FAQ') }}
-@endSection§
+@endSection
 
 @section('content')
     @vite(['resources/js/faq.js'])
