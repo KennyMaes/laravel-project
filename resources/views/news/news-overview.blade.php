@@ -1,11 +1,7 @@
-@extends('layouts.guest')
+@extends('layouts.app')
 
 @section('header')
-
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('News articles') }}
-        </h2>
-
+    {{ __('News articles') }}
 @endSection
 
 @section('content')

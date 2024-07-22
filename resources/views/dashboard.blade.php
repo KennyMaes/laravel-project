@@ -1,22 +1,16 @@
 @extends('layouts.app')
 
 @section('header')
-
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
-
+    {{ __('Dashboard') }}
 @endSection
 
 @section('content')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="font-semibold text-lg p-6">
+
+                <div class="font-semibold text-lg">
                     Welcome back {{$user->username}} 👋
                 </div>
-                <div class="font-semibold text-sm p-6">
+                <div class="font-semibold text-sm pt-6">
                     Your news articles ({{count($user->newsArticles)}})
                 </div>
                 <ul role="list" class="divide-y divide-gray-100 pl-6 pr-6">
@@ -66,9 +60,6 @@
                     </li>
                     @endforeach
                 </ul>
-            </div>
-        </div>
-    </div>
 
 @endSection
 

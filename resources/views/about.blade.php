@@ -1,4 +1,8 @@
-@extends('layouts.guest')
+@extends('layouts.app')
+
+@section('header')
+    {{ __('About') }}
+@endSection
 
 @section('content')
     <div class="lg:mx-auto">
@@ -6,11 +10,14 @@
             Resources that were used for this
         </p>
         <ul>
-            <li>ChatGPT:
-                <a target="_blank" href="//www.chatgpt.com/">www.chatgpt.com</a>
+            <li class="font-bold">ChatGPT:
+                <a class="font-medium text-blue-600" target="_blank" href="//www.chatgpt.com/">www.chatgpt.com</a>
             </li>
-            <li>Laravel documentation:
-                <a target="_blank" href="//www.laravel.com/docs/11.x">www.laravel.com</a>
+            <li class="font-bold">Laravel documentation:
+                <a class="font-medium text-blue-600" target="_blank" href="//www.laravel.com/docs/11.x">www.laravel.com</a>
+            </li>
+            <li class="font-bold">Tailwind:
+                <a class="font-medium text-blue-600" target="_blank" href="//www.tailwindcss.com/">www.tailwindcss.com</a>
             </li>
         </ul>
         <div class="pt-6"></div>
@@ -70,6 +77,12 @@
         </ul>
         <div class="pt-6"></div>
         <hr>
-        <p class="text-sm mt-2">For the many-to-many relation I have a user that could have multiple articles and an article could have multiple authors(users)</p>
+        <p class="text-sm mt-2">For the many-to-many relation (Articles and authors)</p>
+        <ul class="list-disc ml-8">
+            <li>The articles are shown in the user dashboard</li>
+            <li>The authors(users) are shown in the detail view of an article(Top right)</li>
+            <li>Author is added at creating of an article or when contributing to an article</li>
+        </ul>
+
     </div>
 @endSection

@@ -1,4 +1,8 @@
-@extends('layouts.guest')
+@extends('layouts.app')
+
+@section('header')
+    {{ __('FAQ') }}
+@endSection§
 
 @section('content')
     @vite(['resources/js/faq.js'])

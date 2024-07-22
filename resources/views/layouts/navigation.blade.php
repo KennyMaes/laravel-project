@@ -5,7 +5,7 @@
             <div class="flex justify-start gap-4">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center pt-2">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('home') }}">
                         <x-application-logo class="w-12 h-12 fill-current text-gray-500" />
                     </a>
                 </div>
@@ -22,6 +22,9 @@
                         </x-nav-link>
                         <x-nav-link :href="route('news.overview')" :active="request()->routeIs('news.overview')">
                             {{ __('News') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('about')" :active="request()->routeIs('about')">
+                            {{ __('About') }}
                         </x-nav-link>
                         @if(!Auth::user()->isAdmin())
                         <x-nav-link :href="route('contact-form.view')" :active="request()->routeIs('contact-form.view')">

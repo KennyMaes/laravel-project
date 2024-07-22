@@ -7,10 +7,6 @@
 @endSection
 
 @section('content')
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
                     <ul role="list" class="divide-y divide-gray-100">
                         @foreach ($users as $user)
                             <li class="flex justify-between items-center gap-x-6 py-4">
@@ -36,10 +32,6 @@
                             </li>
                         @endforeach
                     </ul>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
