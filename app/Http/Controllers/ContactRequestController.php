@@ -23,4 +23,8 @@ class ContactRequestController extends Controller
 
         return view('contact.contact-overview', ['contactRequests' => $contactRequests]);
     }
+
+    public function getForm() {
+        return view('contact.contact-form');
+    }
 }

@@ -16,7 +16,7 @@
         <li class="font-bold">Laravel documentation:
             <a class="font-medium text-blue-600" target="_blank" href="//www.laravel.com/docs/11.x">www.laravel.com</a>
         </li>
-        <li class="font-bold">Tailwind:
+        <li class="font-bold">Tailwind CSS:
             <a class="font-medium text-blue-600" target="_blank" href="//www.tailwindcss.com/">www.tailwindcss.com</a>
         </li>
     </ul>

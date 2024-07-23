@@ -1,14 +1,13 @@
 <?php
 
 use App\Http\Controllers\ContactRequestController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\FaqCategoryController;
 use App\Http\Controllers\NewsArticleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReactionController;
 use App\Http\Controllers\FaqController;
-use App\Models\FaqCategory;
 use Illuminate\Support\Facades\Route;
-use App\Models\User;
 
 //GLOBAL
 Route::get('/', function () {
@@ -54,48 +53,24 @@ Route::middleware(['auth', 'admin'])->group(function () {
 
 // FAQ Category
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/faq/category/new', function() {
-        return view('FAQ.faq-category-form');
-    })->name('faq-category.new');
-    Route::get('/faq/category/{id}', function($id) {
-        $category = FaqCategory::find($id);
-        return view('FAQ.faq-category-form', ['category' => $category]);
-    })->name('faq-category.edit');
+    Route::get('/faq/category/new', [FaqCategoryController::class, 'getCreateForm'])->name('faq-category.new');
+    Route::get('/faq/category/{id}', [FaqCategoryController::class, 'getEditForm'])->name('faq-category.edit');
     Route::post('/faq-category', [FaqCategoryController::class, 'create'])->name('faq-category.create');
     Route::put('/faq-category/{id}', [FaqCategoryController::class, 'update'])->name('faq-category.update');
     Route::delete('/fac-category/{id}', [FaqCategoryController::class, 'delete'])->name('faq-category.delete');
 });
 
-// COTACT-FORM
-Route::get('/contact-form', function() {
-    return view('contact.contact-form');
-})->name('contact-form.view');
+// CONTACT-FORM
+Route::get('/contact-form', [ContactRequestController::class, 'getForm'])->name('contact-form.view');
 Route::post('/contact-form', [ContactRequestController::class, 'post'])->name('contact-form.post');
 Route::middleware((['auth', 'admin']))->group(function() {
     Route::get('/contact-form/overview', [ContactRequestController::class, 'overview'])->name('contact-requests.overview');
 });
 
-
 // USER
-Route::get('/users', function () {
-    $users = User::all();
-    $currentUser = Auth::user();
-    return view('user.user-overview', ['users' => $users, 'currentUser' => $currentUser]);
-})->middleware(['auth', 'verified', 'admin'])->name('users');
-
-Route::get('/users/{id}', function (string $id) {
-    $user = User::find($id);
-    $currentUser = Auth::user();
-    return view('user.user-profile', ['user' => $user, 'currentUser' => $currentUser]);
-})->middleware(['auth'])->name('users.profile');
-
-Route::patch('/users/{id}/', function (string $id) {
-    $user = User::find($id);
-    $user['is_admin'] = !$user['is_admin'];
-    $user->save();
-
-    return redirect('/users');
-})->middleware(['auth', 'admin'])->name('users.toggle-admin');
+Route::get('/users', [UserController::class, 'getOverview'])->middleware(['auth', 'verified', 'admin'])->name('users');
+Route::get('/users/{id}', [UserController::class, 'getProfile'])->middleware(['auth'])->name('users.profile');
+Route::patch('/users/{id}/', [UserController::class, 'toggleAdmin'])->middleware(['auth', 'admin'])->name('users.toggle-admin');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

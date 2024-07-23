@@ -26,7 +26,7 @@ class FaqCategoryController extends Controller
         return redirect('/faq/new');
     }
 
-    public function update($id)  
+    public function update($id)
     {
         $category = FaqCategory::find($id);
 
@@ -43,5 +43,15 @@ class FaqCategoryController extends Controller
     public function delete($id) {
         FaqCategory::destroy($id);
         return redirect('/faq');
+    }
+
+    public function getEditForm($id) {
+        $category = FaqCategory::find($id);
+        return view('FAQ.faq-category-form', ['category' => $category]);
+
+    }
+
+    public function getCreateForm() {
+        return view('FAQ.faq-category-form');
     }
 }
