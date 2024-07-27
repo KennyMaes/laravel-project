@@ -19,6 +19,9 @@
         <li class="font-bold">Tailwind CSS:
             <a class="font-medium text-blue-600" target="_blank" href="//www.tailwindcss.com/">www.tailwindcss.com</a>
         </li>
+        <li class="font-bold">Laravel Vite:
+            <a class="font-medium text-blue-600" target="_blank" href="//www.medium.com/@mohasin-dev/using-laravel-vite-to-automatically-refresh-your-browser-when-changing-a-blade-file-afa9edeccf46">https://medium.com/</a>
+        </li>
     </ul>
     <div class="pt-6"></div>
     <hr>

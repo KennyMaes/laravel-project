@@ -16,7 +16,7 @@ class ReactionController extends Controller
         $reaction->content = $content;
         $reaction->user_id = auth()->id();
         $reaction->news_article_id = $article_id;
-    
+
         $reaction->save();
         return redirect('/news/'. $article_id);
 
