@@ -34,7 +34,7 @@ class ProfileController extends Controller
         }
 
         if ($request->avatar) {
-            $imageName = Str::uuid().'.'.$request->avatar->extension();  
+            $imageName = Str::uuid().'.'.$request->avatar->extension();
             $request->avatar->move(public_path('avatars'), $imageName);
             $request->user()['image'] = $imageName;
         }

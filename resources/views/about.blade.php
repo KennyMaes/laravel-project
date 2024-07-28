@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.guest')
 
 @section('header')
 {{ __('About') }}
@@ -20,15 +20,22 @@
             <a class="font-medium text-blue-600" target="_blank" href="//www.tailwindcss.com/">www.tailwindcss.com</a>
         </li>
         <li class="font-bold">Laravel Vite:
-            <a class="font-medium text-blue-600" target="_blank" href="//www.medium.com/@mohasin-dev/using-laravel-vite-to-automatically-refresh-your-browser-when-changing-a-blade-file-afa9edeccf46">https://medium.com/</a>
+            <a class="font-medium text-blue-600" target="_blank" href="//www.medium.com/@mohasin-dev/using-laravel-vite-to-automatically-refresh-your-browser-when-changing-a-blade-file-afa9edeccf46">https://medium.com</a>
         </li>
     </ul>
     <div class="pt-6"></div>
     <hr>
-    <p class="text-base font-bold tracking-tight text-gray-700 sm:text-4xl">
+    <p class="text-base font-bold tracking-tight text-gray-700 mb-4 sm:text-4xl">
         Some information about this
         project
     </p>
+    <p class="text-sm font-bold tracking-tight text-gray-700 sm:text-2xl">Repository</p>
+    <ul  class="mb-4">
+        <li class="font-bold">My Github:
+            <a class="font-medium text-blue-600" target="_blank" href="//github.com/KennyMaes/laravel-project/">www.github.com/KennyMaes/laravel-project</a>
+        </li>
+    </ul>
+
     <p class="text-xs">2 users are created when running `php artisan migrate:fresh --seed`</p>
     <ul class="list-disc ml-8">
         <li>Admin</li>

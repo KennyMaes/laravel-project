@@ -69,11 +69,11 @@
             <x-input-label for="biography" :value="__('Biography')" />
             <x-textfield-input id="biography" name="biografie" class="mt-1 block w-full">{{ $user->biografie }}</x-textfield-input>
         </div>
-        
-        
+
+
 
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <button class="btn btn-primary">{{ __('Save') }}</button>
 
             @if (session('status') === 'profile-updated')
                 <p
