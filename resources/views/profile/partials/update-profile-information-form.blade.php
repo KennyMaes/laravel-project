@@ -19,8 +19,7 @@
 
         <div>
             <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
-            <x-input-error class="mt-2" :messages="$errors->get('name')" />
+            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" autofocus autocomplete="name" />
         </div>
 
         <div>
@@ -76,13 +75,19 @@
             <button class="btn btn-primary">{{ __('Save') }}</button>
 
             @if (session('status') === 'profile-updated')
-                <p
-                    x-data="{ show: true }"
-                    x-show="show"
-                    x-transition
-                    x-init="setTimeout(() => show = false, 2000)"
-                    class="text-sm text-gray-600"
-                >{{ __('Saved.') }}</p>
+                <div class="alert alert-primary p-1 m-0">
+                    Saved
+                </div>
+            @endif
+
+            @if ($errors->any())
+            <div class="alert alert-danger p-1 m-0" >
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>*{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
             @endif
         </div>
     </form>
