@@ -21,7 +21,7 @@ class ProfileUpdateRequest extends FormRequest
             'image' => ['image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
             'username' => ['string', 'max:50'],
             'birthdate' => ['string'],
-            'biografie' => ['string', 'max:255'],
+            'biografie' => ['nullable', 'string', 'max:255'],
         ];
     }
 }
