@@ -12,7 +12,8 @@
                         <div class="text-indigo-400">
                             Authors:
                             @foreach ($article->users as $user)
-                            {{ $user->username }}
+                            <a class="link" href="{{ route('users.profile', ['id' => $user->id]) }}">{{ $user->username }}</a>
+                            <a href=""></a>
                             @if (!$loop->last), @endif
                             @endforeach
                         </div>
